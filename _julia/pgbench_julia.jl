@@ -26,10 +26,6 @@ function run(query_file, user, duration)
     conn = LibPQ.Connection("dbname=postgres user=$user")
     json = JSON.parsefile(query_file)
     @show json["query"] , json["args"]
-    if "teardown" in keys(json)
-        result = execute(conn, json["teardown"])
-        clear!(result)
-    end
     if "setup" in keys(json)
         result = execute(conn, json["setup"])
         clear!(result)
